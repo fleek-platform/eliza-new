@@ -77,11 +77,9 @@ pluginsCmd
 
     const plugins = await getPlugins()
 
-    console.log('plugins', plugins);
-
     // ensure prefix
-    const pluginName = '@elizaos-plugins/' + plugin.replace(/^@elizaos-plugins\//, '')
-    const namePart = pluginName.replace(/^@elizaos-plugins\//, '')
+    const namePart = plugin.replace(/.+\//, '');
+    const pluginName = '@elizaos/' + namePart;
     const elizaOSroot = pathUtil.resolve(__dirname, '../..')
 
     let repo = ''
@@ -158,11 +156,11 @@ pluginsCmd
 
     // ok this can be an issue if it's referencing a plugin it couldn't be
     console.log('Making sure plugin has access to @elizaos/core')
-    const pluginAddCoreOutput = execSync('pnpm add @elizaos/core@workspace:* --filter ./packages/' + namePart, { cwd: elizaOSroot, stdio: 'pipe' }).toString().trim();
+    const pluginAddCoreOutput = execSync('pnpm add "@elizaos/core@workspace:*" --filter ./packages/' + namePart, { cwd: elizaOSroot, stdio: 'pipe' }).toString().trim();
 
-    if (packageJson.name !== '@elizaos-plugins/' + namePart) {
+    if (packageJson.name !== '@elizaos/' + namePart) {
       // Update the name field
-      packageJson.name = '@elizaos-plugins/' + namePart
+      packageJson.name = '@elizaos/' + namePart
       console.log('Updating plugins package.json name to', packageJson.name)
 
       // Write the updated package.json back to disk
@@ -176,10 +174,10 @@ pluginsCmd
     if (!agentPackageJson.dependencies[pluginName]) {
       console.log('Adding plugin', plugin, 'to agent/package.json')
       try {
-        const pluginAddAgentOutput = execSync('pnpm add ' + pluginName + '@workspace:* --filter ./agent', { cwd: elizaOSroot, stdio: 'pipe' }).toString().trim();
+        const pluginAddAgentOutput = execSync('pnpm add "' + pluginName + '@workspace:*" --filter ./agent', { cwd: elizaOSroot, stdio: 'pipe' }).toString().trim();
         //console.log('pluginAddAgentOutput', pluginAddAgentOutput)
       } catch (e) {
-        console.error('error', e)
+        console.error('error', e, e?.output?.[1]?.toString('utf8'))
       }
     }
 
