@@ -77,6 +77,8 @@ pluginsCmd
 
     const plugins = await getPlugins()
 
+    console.log('plugins', plugins);
+
     // ensure prefix
     const pluginName = '@elizaos-plugins/' + plugin.replace(/^@elizaos-plugins\//, '')
     const namePart = pluginName.replace(/^@elizaos-plugins\//, '')

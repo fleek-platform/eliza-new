@@ -40,6 +40,11 @@ COPY . .
 # Install dependencies
 RUN pnpm install
 
+# Install clients and plugins we expose to users
+WORKDIR /app/agent
+RUN pnpm install @elizaos/plugin-0g @elizaos/plugin-abstract @elizaos/plugin-akash @elizaos/plugin-allora @elizaos/plugin-anyone @elizaos/plugin-aptos @elizaos/plugin-arthera @elizaos/plugin-asterai @elizaos/plugin-autonome @elizaos/plugin-avail @elizaos/plugin-avalanche @elizaos/plugin-binance  @elizaos/plugin-coingecko @elizaos/plugin-coinmarketcap @elizaos/plugin-conflux @elizaos/plugin-cosmos @elizaos/plugin-cronoszkevm @elizaos/plugin-depin @elizaos/plugin-evm @elizaos/plugin-flow @elizaos/plugin-fuel @elizaos/plugin-genlayer @elizaos/plugin-hyperliquid @elizaos/plugin-icp @elizaos/plugin-multiversx @elizaos/plugin-near @elizaos/plugin-rabbi-trader @elizaos/plugin-solana @elizaos/plugin-spheron @elizaos/plugin-starknet @elizaos/plugin-sui @elizaos/plugin-ton @elizaos/client-discord @elizaos/client-twitter @elizaos/client-telegram @elizaos/client-direct @elizaos/client-farcaster @elizaos/client-lens @elizaos/client-slack @elizaos/client-github
+WORKDIR /app
+
 # Build the project
 RUN pnpm run build && pnpm prune --prod
 
