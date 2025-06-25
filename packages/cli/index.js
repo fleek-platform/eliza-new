@@ -84,7 +84,7 @@ pluginsCmd
 
     let repo = ''
     if (namePart === 'plugin-trustdb') {
-      repo = 'elizaos-plugins/plugin-trustdb'
+      repo = '@elizaos/plugin-trustdb'
     } else {
       const repoData = plugins[pluginName]?.split(':')
       if (!repoData) {
@@ -104,7 +104,7 @@ pluginsCmd
     if (!fs.existsSync(pkgPath + '/package.json')) {
       // clone it
       console.log('cloning', namePart, 'to', pkgPath)
-      const gitOutput = execSync('git clone https://github.com/' + repo + ' "' + pkgPath + '"', { stdio: 'pipe' }).toString().trim();
+      const gitOutput = execSync(`git clone https://${process.env.GIT_USERNAME}:${process.env.GIT_PASSWORD}@github.com/${repo} "${pkgPath}"`, { stdio: 'pipe' }).toString().trim();
       // submodule init & update?
     }
 

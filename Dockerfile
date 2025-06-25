@@ -41,8 +41,47 @@ COPY . .
 RUN pnpm install
 
 # Install clients and plugins we expose to users
-WORKDIR /app/agent
-RUN pnpm install @elizaos/plugin-0g @elizaos/plugin-abstract @elizaos/plugin-akash @elizaos/plugin-allora @elizaos/plugin-anyone @elizaos/plugin-aptos @elizaos/plugin-arthera @elizaos/plugin-asterai @elizaos/plugin-autonome @elizaos/plugin-avail @elizaos/plugin-avalanche @elizaos/plugin-binance  @elizaos/plugin-coingecko @elizaos/plugin-coinmarketcap @elizaos/plugin-conflux @elizaos/plugin-cosmos @elizaos/plugin-cronoszkevm @elizaos/plugin-depin @elizaos/plugin-evm @elizaos/plugin-flow @elizaos/plugin-fuel @elizaos/plugin-genlayer @elizaos/plugin-hyperliquid @elizaos/plugin-icp @elizaos/plugin-multiversx @elizaos/plugin-near @elizaos/plugin-rabbi-trader @elizaos/plugin-solana @elizaos/plugin-spheron @elizaos/plugin-starknet @elizaos/plugin-sui @elizaos/plugin-ton @elizaos/client-discord @elizaos/client-twitter @elizaos/client-telegram @elizaos/client-direct @elizaos/client-farcaster @elizaos/client-lens @elizaos/client-slack @elizaos/client-github
+WORKDIR /app/packages/cli
+RUN --mount=type=secret,id=GIT_USERNAME,env=GIT_USERNAME --mount=type=secret,id=GIT_PASSWORD,env=GIT_PASSWORD node index.js plugins install @elizaos-plugins/plugin-0g && \
+    node index.js plugins install @elizaos-plugins/plugin-abstract && \
+    node index.js plugins install @elizaos-plugins/plugin-akash && \
+    node index.js plugins install @elizaos-plugins/plugin-allora && \
+    node index.js plugins install @elizaos-plugins/plugin-anyone && \
+    node index.js plugins install @elizaos-plugins/plugin-aptos && \
+    node index.js plugins install @elizaos-plugins/plugin-arthera && \
+    node index.js plugins install @elizaos-plugins/plugin-asterai && \
+    node index.js plugins install @elizaos-plugins/plugin-autonome && \
+    node index.js plugins install @elizaos-plugins/plugin-avail && \
+    node index.js plugins install @elizaos-plugins/plugin-avalanche && \
+    node index.js plugins install @elizaos-plugins/plugin-binance && \
+    node index.js plugins install @elizaos-plugins/plugin-coingecko && \
+    node index.js plugins install @elizaos-plugins/plugin-coinmarketcap && \
+    node index.js plugins install @elizaos-plugins/plugin-conflux && \
+    node index.js plugins install @elizaos-plugins/plugin-cosmos && \
+    node index.js plugins install @elizaos-plugins/plugin-cronoszkevm && \
+    node index.js plugins install @elizaos-plugins/plugin-depin && \
+    node index.js plugins install @elizaos-plugins/plugin-evm && \
+    node index.js plugins install @elizaos-plugins/plugin-flow && \
+    node index.js plugins install @elizaos-plugins/plugin-fuel && \
+    node index.js plugins install @elizaos-plugins/plugin-genlayer && \
+    node index.js plugins install @elizaos-plugins/plugin-hyperliquid && \
+    node index.js plugins install @elizaos-plugins/plugin-icp && \
+    node index.js plugins install @elizaos-plugins/plugin-multiversx && \
+    node index.js plugins install @elizaos-plugins/plugin-near && \
+    node index.js plugins install @elizaos-plugins/plugin-rabbi-trader && \
+    node index.js plugins install @elizaos-plugins/plugin-solana && \
+    node index.js plugins install @elizaos-plugins/plugin-spheron && \
+    node index.js plugins install @elizaos-plugins/plugin-starknet && \
+    node index.js plugins install @elizaos-plugins/plugin-sui && \
+    node index.js plugins install @elizaos-plugins/plugin-ton && \
+    node index.js plugins install @elizaos-plugins/client-discord && \
+    node index.js plugins install @elizaos-plugins/client-twitter && \
+    node index.js plugins install @elizaos-plugins/client-telegram && \
+    node index.js plugins install @elizaos-plugins/client-direct && \
+    node index.js plugins install @elizaos-plugins/client-farcaster && \
+    node index.js plugins install @elizaos-plugins/client-lens && \
+    node index.js plugins install @elizaos-plugins/client-slack && \
+    node index.js plugins install @elizaos-plugins/client-github
 WORKDIR /app
 
 # Build the project
