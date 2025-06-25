@@ -85,6 +85,8 @@ pluginsCmd
     let repo = ''
     if (namePart === 'plugin-trustdb') {
       repo = '@elizaos/plugin-trustdb'
+    } else if (namePart === 'plugin-knowledge') {
+      repo = 'elizaos-plugins/plugin-knowledge';
     } else {
       const repoData = plugins[pluginName]?.split(':')
       if (!repoData) {
@@ -156,7 +158,12 @@ pluginsCmd
 
     // ok this can be an issue if it's referencing a plugin it couldn't be
     console.log('Making sure plugin has access to @elizaos/core')
-    const pluginAddCoreOutput = execSync('pnpm add "@elizaos/core@workspace:*" --filter ./packages/' + namePart, { cwd: elizaOSroot, stdio: 'pipe' }).toString().trim();
+
+    try {
+      execSync('pnpm add "@elizaos/core@workspace:*" --filter ./packages/' + namePart, { cwd: elizaOSroot, stdio: 'pipe' }).toString().trim();
+    } catch (e) {
+        console.error('error', e, e?.output?.[1]?.toString('utf8'))
+    }
 
     if (packageJson.name !== '@elizaos/' + namePart) {
       // Update the name field

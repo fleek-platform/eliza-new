@@ -84,6 +84,9 @@ RUN --mount=type=secret,id=GIT_USERNAME,env=GIT_USERNAME --mount=type=secret,id=
     node index.js plugins install @elizaos-plugins/client-github
 WORKDIR /app
 
+# Install dependencies for new plugins
+RUN pnpm install
+
 # Build the project
 RUN pnpm run build && pnpm prune --prod
 
