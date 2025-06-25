@@ -1,3 +1,7 @@
+# Fleek Notes
+
+- Build Docker with `docker build --secret id=GIT_USERNAME --secret id=GIT_PASSWORD -t eliza:0.25.9 .` and specify an arbitrary GitHub username and a personal access token as environment variables to clone a public repository
+
 # Eliza 🤖
 
 <div align="center">
