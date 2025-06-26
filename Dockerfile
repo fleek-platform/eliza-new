@@ -42,50 +42,16 @@ RUN pnpm install
 
 # Install clients and plugins we expose to users
 WORKDIR /app/packages/cli
-RUN --mount=type=secret,id=GIT_USERNAME,env=GIT_USERNAME --mount=type=secret,id=GIT_PASSWORD,env=GIT_PASSWORD node index.js plugins install @elizaos-plugins/plugin-0g && \
-    node index.js plugins install @elizaos-plugins/plugin-abstract && \
-    node index.js plugins install @elizaos-plugins/plugin-akash && \
-    node index.js plugins install @elizaos-plugins/plugin-allora && \
-    node index.js plugins install @elizaos-plugins/plugin-anyone && \
-    node index.js plugins install @elizaos-plugins/plugin-aptos && \
-    node index.js plugins install @elizaos-plugins/plugin-arthera && \
-    node index.js plugins install @elizaos-plugins/plugin-asterai && \
-    node index.js plugins install @elizaos-plugins/plugin-autonome && \
-    node index.js plugins install @elizaos-plugins/plugin-avail && \
-    node index.js plugins install @elizaos-plugins/plugin-avalanche && \
-    node index.js plugins install @elizaos-plugins/plugin-binance && \
-    node index.js plugins install @elizaos-plugins/plugin-coingecko && \
-    node index.js plugins install @elizaos-plugins/plugin-coinmarketcap && \
-    node index.js plugins install @elizaos-plugins/plugin-conflux && \
-    node index.js plugins install @elizaos-plugins/plugin-cosmos && \
-    node index.js plugins install @elizaos-plugins/plugin-cronoszkevm && \
-    node index.js plugins install @elizaos-plugins/plugin-depin && \
-    node index.js plugins install @elizaos-plugins/plugin-evm && \
-    node index.js plugins install @elizaos-plugins/plugin-flow && \
-    node index.js plugins install @elizaos-plugins/plugin-fuel && \
-    node index.js plugins install @elizaos-plugins/plugin-genlayer && \
-    node index.js plugins install @elizaos-plugins/plugin-hyperliquid && \
-    node index.js plugins install @elizaos-plugins/plugin-icp && \
-    node index.js plugins install @elizaos-plugins/plugin-multiversx && \
-    node index.js plugins install @elizaos-plugins/plugin-near && \
-    node index.js plugins install @elizaos-plugins/plugin-rabbi-trader && \
-    node index.js plugins install @elizaos-plugins/plugin-solana && \
-    node index.js plugins install @elizaos-plugins/plugin-spheron && \
-    node index.js plugins install @elizaos-plugins/plugin-starknet && \
-    node index.js plugins install @elizaos-plugins/plugin-sui && \
-    node index.js plugins install @elizaos-plugins/plugin-ton && \
+RUN --mount=type=secret,id=GIT_USERNAME,env=GIT_USERNAME --mount=type=secret,id=GIT_PASSWORD,env=GIT_PASSWORD node index.js plugins install @elizaos-plugins/client-discord && \
     node index.js plugins install @elizaos-plugins/client-discord && \
     node index.js plugins install @elizaos-plugins/client-twitter && \
     node index.js plugins install @elizaos-plugins/client-telegram && \
-    node index.js plugins install @elizaos-plugins/client-direct && \
     node index.js plugins install @elizaos-plugins/client-farcaster && \
-    node index.js plugins install @elizaos-plugins/client-lens && \
-    node index.js plugins install @elizaos-plugins/client-slack && \
-    node index.js plugins install @elizaos-plugins/client-github
+    node index.js plugins install @elizaos-plugins/client-slack
 WORKDIR /app
 
-# Install dependencies for new plugins
-RUN pnpm install
+# Install dependencies for added plugins
+RUN pnpm install --no-frozen-lockfile
 
 # Build the project
 RUN pnpm run build && pnpm prune --prod
