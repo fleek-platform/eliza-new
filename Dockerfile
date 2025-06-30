@@ -50,9 +50,6 @@ RUN --mount=type=secret,id=GIT_USERNAME,env=GIT_USERNAME --mount=type=secret,id=
     node index.js plugins install @elizaos-plugins/client-slack
 WORKDIR /app
 
-# Install dependencies for added plugins
-RUN pnpm install --no-frozen-lockfile
-
 # Build the project
 RUN pnpm run build && pnpm prune --prod
 
