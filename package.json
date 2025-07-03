@@ -75,6 +75,7 @@
     "utf-8-validate"
   ],
   "dependencies": {
+    "@elizaos/plugin-twitter": "1.0.13",
     "helmet": "^8.1.0"
   }
 }
